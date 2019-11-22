@@ -1,5 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/fetcher');
+mongoose.connect('mongodb://localhost:1128/repos', {useNewUrlParser: true}).then(
+  () => {console.log('ready!')},
+  err => {console.log('error')}
+);
+
 
 let repoSchema = mongoose.Schema({
   // TODO: your schema here!

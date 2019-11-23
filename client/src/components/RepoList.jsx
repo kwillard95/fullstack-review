@@ -9,7 +9,7 @@ const RepoList = (props) => {
       <ul>
       {props.repos.map((repo) => {
         return (
-        <li>Name: {repo.full_name} Desciption: {repo.description} URL: {repo.url} # of Times Forked: {repo.fork_count}</li>
+        <li> <div><b>Name:</b> {repo.full_name}</div> <div><b>Desciption:</b> {repo.description}</div>  <div><b>URL:</b> {repo.url}</div><div><b># of Times Forked:</b> {repo.forks_count}</div></li>
         )
       })}
       </ul>

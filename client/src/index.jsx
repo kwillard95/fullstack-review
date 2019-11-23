@@ -13,15 +13,15 @@ class App extends React.Component {
     }
 
   }
-  // onComponentDidMount() {
-  //   axios.get('/repos')
-  //   .then(function(response) {
-  //     console.log(response)
-  //   })
-  //   .catch(function(err) {
-  //     console.log('get error')
-  //   })
-  // }
+  componentDidMount() {
+    axios.get('/repos')
+    .then((response) => {
+      this.setState({repos: response.data});
+    })
+    .catch(function(err) {
+      console.log('get error')
+    })
+  }
 
   search(term) {
     console.log(`${term} was searched`);
@@ -32,9 +32,7 @@ class App extends React.Component {
         // console.log(response)
         axios.get('/repos')
           .then( (response) => {
-            console.log('before state', response.data)
             this.setState({repos: response.data});
-            console.log("state data", this.state.repos)
           })
           .catch( (err) => {
             console.log('gettt error')
@@ -45,11 +43,19 @@ class App extends React.Component {
       })
   }
 
+  delete(e) {
+    e.preventDefault();
+    axios.delete('/repos')
+    .then((response) => {
+      this.setState({repos: []})
+    })
+  }
+
   render() {
     return (<div>
       <h1>Github Fetcher</h1>
+      <Search onSearch={this.search.bind(this)} onDelete={this.delete.bind(this)} />
       <RepoList repos={this.state.repos} />
-      <Search onSearch={this.search.bind(this)} />
     </div>)
   }
 }

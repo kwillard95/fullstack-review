@@ -11,10 +11,13 @@ app.use(bodyParser.json())
 app.post('/repos', function (req, res) {
   getReposByUsername(req.body.username)
     .then(function (response) {
-      response.data.map((repo) => {
-        db.save(repo);
+      var promises = response.data.map((repo) => {
+        return db.save(repo);
       })
-      res.send("sending")
+      Promise.all(promises)
+      .then(()=>{
+        res.send()
+      })
     })
     .catch(function (error) {
       console.log('error', error)
@@ -27,6 +30,13 @@ app.get('/repos', function (req, res) {
     res.send(response);
   })
 });
+
+app.delete('/repos', function (req, res) {
+  db.remove()
+  .then((response) => {
+    res.send();
+  })
+})
 
 let port = 1128;
 

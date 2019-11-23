@@ -20,7 +20,7 @@ let Repo = mongoose.model('Repo', repoSchema);
 
 let save = (data) => {
   var doc = new Repo(data);
-  Repo.findOne({ id: data.id }, function (err, repo) {
+  return Repo.findOne({ id: data.id }, function (err, repo) {
     if (err) {
       console.log('error in find one')
     } else if (repo) {
@@ -34,7 +34,6 @@ let save = (data) => {
 }
 
 let retrieve = () => {
-  console.log('here')
   return Repo.find({}).sort({ forks_count: -1 }).limit(25).exec((err, repos) => {
     if (err) {
       console.log(err);
@@ -47,5 +46,14 @@ let retrieve = () => {
   // })
 }
 
+let remove = () => {
+  return Repo.deleteMany({}, (err) => {
+    if (err) {
+      console.log('error deleting')
+    }
+  })
+}
+
 module.exports.save = save;
 module.exports.retrieve = retrieve;
+module.exports.remove = remove;

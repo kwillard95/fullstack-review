@@ -28,14 +28,16 @@ class App extends React.Component {
     axios.post('/repos', {
       username: term
     })
-      .then(function (response) {
+      .then((response) => {
         // console.log(response)
         axios.get('/repos')
-          .then(function (response) {
-            console.log(response.data)
+          .then( (response) => {
+            console.log('before state', response.data)
+            this.setState({repos: response.data});
+            console.log("state data", this.state.repos)
           })
-          .catch(function (err) {
-            console.log('get error')
+          .catch( (err) => {
+            console.log('gettt error')
           })
       })
       .catch(function (error) {

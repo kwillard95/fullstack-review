@@ -13,11 +13,20 @@ class App extends React.Component {
     }
 
   }
+  // onComponentDidMount() {
+  //   axios.get('/repos')
+  //   .then(function(response) {
+  //     console.log(response)
+  //   })
+  //   .catch(function(err) {
+  //     console.log('get error')
+  //   })
+  // }
 
   search (term) {
     console.log(`${term} was searched`);
     axios.post('/repos', {
-      username: {name: term}
+      username: term
     })
     .then(function(response) {
       console.log(response)

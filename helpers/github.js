@@ -6,7 +6,7 @@ let getReposByUsername = (user) => {
   console.log('user', user);
   let options = {
     method: 'get',
-    url: `https://api.github.com/users/${user.name}/repos`,
+    url: `https://api.github.com/users/${user}/repos`,
     headers: {
       'Accept': 'application/vnd.github.v3+json',
       'User-Agent': 'request',
@@ -14,13 +14,7 @@ let getReposByUsername = (user) => {
     }
   };
 
-  axios(options)
-  .then(function (response) {
-    console.log('response', response)
-  })
-    .catch(function (error) {
-      console.log('error', error)
-    })
+  return axios(options)
 
 }
 

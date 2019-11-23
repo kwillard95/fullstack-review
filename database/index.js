@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost:1128/repos', {useNewUrlParser: true}).then(
-  () => {console.log('ready!')},
-  err => {console.log('error')}
-);
+mongoose.connect('mongodb://localhost/repos', {useNewUrlParser: true}).then(
+  () => {console.log('ready!')}
+).catch(function(err) {
+  console.log('error')
+})
 
 
 let repoSchema = mongoose.Schema({
